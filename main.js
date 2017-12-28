@@ -15,12 +15,14 @@ app.on('ready', () => {
         maximizable: false,
         resizable: false
     });
-
     if (data.hasUser()) {
-        console.log("[INFO] ")
+        console.log("[INFO] Loaded user " + data.getUser().name);
+        mainWindow.loadURL(`${__dirname}/app/view/index/index.html`);
+
     } else {
         console.log("[INFO] Guest user detected! Showing welcome window.");
         mainWindow.loadURL(`${__dirname}/app/view/welcome/welcome.html`);
+
     }
 
 });
