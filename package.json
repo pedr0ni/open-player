@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "electron": "^1.7.10",
-    "jsonfile-promised": "0.0.1"
+    "json-file": "^0.1.0"
   }
 }
