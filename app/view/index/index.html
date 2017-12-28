@@ -1,0 +1,48 @@
+<html>
+
+    <head>
+        <meta charset="utf-8"/>
+        <title>Escute suas músicas em qualquer plataforma</title>
+        <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="../../assets/css/fontawesome-all.min.css"/>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto" style="font-size: 30px;">
+                    <li class="nav-item">
+                        <a class="nav-link"><i class="fa fa-angle-double-left"></i></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link"><i class="fa fa-play"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"><i class="fa fa-angle-double-right"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"><i class="fa fa-volume-up"></i></a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav mr-auto">
+                    <a class="navbar-brand" href="#" style="width: 420px;">
+                        <img src="../../assets/images/music_default.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                        <span id="current-track" style="font-size: 18px;">Exemplo Musica</span>
+                        <div class="progress" style="margin-top: 5px; height: 5px;">
+                            <div style="width: 50%;" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </a>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Música, Autor, Playlist..." aria-label="Procurar">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Procurar</button>
+                </form>
+            </div>
+        </nav>
+    </body>
+
+    <script src="index.js"></script>
+    <script src="../../assets/js/bootstrap.min.js"></script>
+
+</html>
