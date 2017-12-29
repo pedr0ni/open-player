@@ -154,7 +154,8 @@ class Player {
     }
 
     clear() {
-        this.playing.stop();
+        if (this.playing != undefined)
+            this.playing.stop();
         this.index = 0;
         this.list = [];
         this.file.set('musics', undefined);
