@@ -15,6 +15,9 @@
                         <a class="nav-link" id="add-music"><i class="fa fa-plus"></i></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="clear-btn"><i class="fa fa-trash"></i></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="btn-prev"><i class="fa fa-angle-double-left"></i></a>
                     </li>
                     <li class="nav-item active">
@@ -23,9 +26,7 @@
                     <li class="nav-item">
                         <a class="nav-link" id="btn-next"><i class="fa fa-angle-double-right"></i></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="volume-btn"><i class="fa fa-volume-up"></i></a>
-                    </li>
+
                 </ul>
 
                 <ul class="navbar-nav mr-auto">
@@ -49,7 +50,6 @@
                     <th scope="col">Titulo</th>
                     <th scope="col">Autor</th>
                     <th scope="col">Duração</th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody id="user-musics">
@@ -57,6 +57,8 @@
         </table>
     </body>
 
+    <script src="../../modules/Music.js"></script>
+    <script src="../../modules/Player.js"></script>
     <script src="index.js"></script>
     <script src="../../assets/js/bootstrap.min.js"></script>
 
