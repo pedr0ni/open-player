@@ -1,8 +1,8 @@
 # open-player
 
-[build]: https://img.shields.io/travis/rust-lang/rust.svg
-[license]: https://img.shields.io/aur/license/yaourt.svg
-[download]: https://img.shields.io/badge/Download-1.0.0-blue.svg
+![build](https://img.shields.io/travis/rust-lang/rust.svg)
+![license](https://img.shields.io/aur/license/yaourt.svg)
+![download](https://img.shields.io/badge/Download-1.0.0-blue.svg)
 
 A open-source music player with Electron
 
