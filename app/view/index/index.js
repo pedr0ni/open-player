@@ -98,3 +98,10 @@ clear_btn.addEventListener('click', (event) => {
 
     player.clear();
 });
+
+let conteudo = document.querySelector("#conteudo");
+let yt_btn = document.querySelector("#yt-btn");
+yt_btn.addEventListener('click', (event) => {
+    event.preventDefault();
+    
+});
