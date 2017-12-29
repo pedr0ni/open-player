@@ -1,5 +1,4 @@
 const { app, BrowserWindow, Menu, Tray, dialog, ipcMain } = require('electron');
-const data = require('./app/modules/data');
 
 let $TITLE = "open-player";
 
@@ -15,17 +14,15 @@ app.on('ready', () => {
         maximizable: false,
         resizable: false,
         frame: false,
-        icon: __dirname + "/app/assets/images/music_default.png"
+        icon: __dirname + "/app/assets/images/music_default.png",
+        show: false
     });
-    let tray = new Tray(__dirname + "/app/assets/images/music_default.png");
-    if (data.hasUser()) {
-        console.log("[INFO] Loaded user " + data.getUser().name);
-        mainWindow.loadURL(`${__dirname}/app/view/index/index.html`);
-    } else {
-        console.log("[INFO] Guest user detected! Showing welcome window.");
-        mainWindow.loadURL(`${__dirname}/app/view/welcome/welcome.html`);
-    }
+    mainWindow.loadURL(`${__dirname}/app/view/index/index.html`);
+    mainWindow.on('ready-to-show', ()=> {
+        mainWindow.show();
+    });
 
+    let tray = new Tray(__dirname + "/app/assets/images/music_default.png");
 });
 
 app.on('window-all-closed', () => {
