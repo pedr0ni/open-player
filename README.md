@@ -39,6 +39,8 @@ electron-packager open-player --platform=win32 --arch=x64
 
 * [Electron](https://electronjs.org/) - The framework used
 * [NodeJS](https://nodejs.org/en/) - Dependency Management
+* [Bootstrap v4](https://getbootstrap.com/docs/4.0/getting-started/download/) - CSS Framework
+* [Fontawesome 5](https://fontawesome.com/) - Icons
 
 ## Authors
 
