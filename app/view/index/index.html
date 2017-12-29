@@ -12,25 +12,28 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto" style="font-size: 30px;">
                     <li class="nav-item">
-                        <a class="nav-link"><i class="fa fa-angle-double-left"></i></a>
+                        <a class="nav-link" id="add-music"><i class="fa fa-plus"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="btn-prev"><i class="fa fa-angle-double-left"></i></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link"><i class="fa fa-play"></i></a>
+                        <a class="nav-link" id="play-btn"><i class="fa fa-play"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"><i class="fa fa-angle-double-right"></i></a>
+                        <a class="nav-link" id="btn-next"><i class="fa fa-angle-double-right"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"><i class="fa fa-volume-up"></i></a>
+                        <a class="nav-link" id="volume-btn"><i class="fa fa-volume-up"></i></a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav mr-auto">
-                    <a class="navbar-brand" href="#" style="width: 420px;">
+                    <a class="navbar-brand" style="width: 420px; color: white !important;">
                         <img src="../../assets/images/music_default.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                        <span id="current-track" style="font-size: 18px;">Exemplo Musica</span>
+                        <span id="current-track" style="font-size: 18px;">Nenhuma música tocando...</span>
                         <div class="progress" style="margin-top: 5px; height: 5px;">
-                            <div style="width: 50%;" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div id="bar" style="width: 0%;" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </a>
                 </ul>
@@ -40,6 +43,19 @@
                 </form>
             </div>
         </nav>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Duração</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody id="user-musics">
+            </tbody>
+        </table>
     </body>
 
     <script src="index.js"></script>

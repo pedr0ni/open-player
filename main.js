@@ -13,7 +13,8 @@ app.on('ready', () => {
         width: 1280,
         height: 720,
         maximizable: false,
-        resizable: false
+        resizable: false,
+        frame: false
     });
     if (data.hasUser()) {
         console.log("[INFO] Loaded user " + data.getUser().name);
