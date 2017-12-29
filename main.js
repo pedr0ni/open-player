@@ -14,7 +14,8 @@ app.on('ready', () => {
         height: 720,
         maximizable: false,
         resizable: false,
-        frame: false
+        frame: false,
+        icon: __dirname + "/app/assets/images/music_default.png"
     });
     if (data.hasUser()) {
         console.log("[INFO] Loaded user " + data.getUser().name);

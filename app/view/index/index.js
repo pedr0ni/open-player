@@ -6,7 +6,7 @@ const { ipcRenderer } = require('electron');
 let bar = document.querySelector("#bar");
 
 let user_musics = document.querySelector("#user-musics");
-let player = new Player(user_musics);
+let player = new Player([user_musics, document.querySelector("#current-track"), document.querySelector("#play-btn")]);
 
 let add_btn = document.querySelector("#add-music");
 add_btn.addEventListener('click', (event) => {
@@ -87,7 +87,7 @@ query.addEventListener('input', (event) => {
     });
     var rows = "";
     results.forEach((entry) => {
-        rows += "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+entry.formatted+"</td></tr>";
+        rows += "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+entry.format()+"</td></tr>";
     })
     user_musics.innerHTML = rows;
 });

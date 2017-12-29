@@ -4,7 +4,12 @@ let database = __dirname + "/../../modules/database/playlist.config.json";
 
 class Player {
 
-    constructor(element) {
+    /**
+     * element[0] = table rows
+     * element[1] = current track
+     * element[2] = play button
+     */
+    constructor(elements) {
         this.index = 0;
         this.file = json.read(database);
         this.list = [];
@@ -14,13 +19,12 @@ class Player {
                 let m = new Music(entry.titulo, entry.autor, entry.path);
                 setTimeout(() => {
                     this.list.push(m);
-                    element.innerHTML = element.innerHTML + "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td></tr>";
+                    elements[0].innerHTML = elements[0].innerHTML + "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td></tr>";
                 }, 200);
             });
         }
 
-        this.element = element;
-
+        this.elements = elements;
     }
 
     /**
@@ -126,6 +130,7 @@ class Player {
     }
 
     next() {
+        if (this.list.length == 0) return;
         this.index = this.index + 1;
         if (this.list[this.index] == undefined) {
             this.index = 0;
@@ -140,6 +145,7 @@ class Player {
     }
 
     prev() {
+        if (this.list.length == 0) return;
         this.index = this.index - 1;
         if (this.list[this.index] == undefined) {
             this.index = this.list.length - 1;
@@ -154,14 +160,19 @@ class Player {
     }
 
     clear() {
+        if (this.list.length == 0) return;
         if (this.playing != undefined)
             this.playing.stop();
+        clearInterval(this.task);
         this.index = 0;
+        this.playing = undefined;
+        this.elements[1].textContent = "Nenhuma música tocando...";
+        this.elements[2].innerHTML = "<i class=\"fa fa-play\"></i>";
         this.list = [];
         this.file.set('musics', undefined);
         this.file.write(() => {
             console.log("[INFO] Playlist cleared");
-            this.element.innerHTML = "";
+            this.elements[0].innerHTML = "";
         });
     }
 }
