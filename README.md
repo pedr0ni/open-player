@@ -18,12 +18,21 @@ cd open-player
 npm init
 npm install electron --save
 npm install json-file --save
+npm install moment --save
+npm install musicmetadata --save
+npm install electron-packager -g
 ```
 
 ## Running the tests
 
 ```
 npm start
+```
+
+## Deployment
+
+```
+electron-packager open-player
 ```
 
 ## Built With

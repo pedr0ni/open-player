@@ -14,7 +14,6 @@
     "electron-packager": "^10.1.0",
     "json-file": "^0.1.0",
     "moment": "^2.20.1",
-    "musicmetadata": "^2.0.5",
-    "play-sound": "^1.1.2"
+    "musicmetadata": "^2.0.5"
   }
 }
