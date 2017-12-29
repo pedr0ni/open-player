@@ -6,7 +6,7 @@ const { ipcRenderer } = require('electron');
 let bar = document.querySelector("#bar");
 
 let user_musics = document.querySelector("#user-musics");
-let player = new Player([user_musics, document.querySelector("#current-track"), document.querySelector("#play-btn")]);
+let player = new Player([user_musics, document.querySelector("#current-track"), document.querySelector("#play-btn"), bar]);
 
 let add_btn = document.querySelector("#add-music");
 add_btn.addEventListener('click', (event) => {
@@ -27,10 +27,10 @@ add_btn.addEventListener('click', (event) => {
         let parser = mm(fs.createReadStream(dir), function (err, metadata) {
             if (err) throw err;
             let m = new Music(metadata.title, metadata.artist[0], dir);
-            setTimeout(() => {
+            m.audio.onloadedmetadata = () => {
                 player.addMusic(m);
                 user_musics.innerHTML = user_musics.innerHTML + "<tr><td>"+metadata.title+"</td><td>"+metadata.artist[0]+"</td><td>"+m.format()+"</td></tr>";
-            }, 100);
+            };
         });
     }
 });

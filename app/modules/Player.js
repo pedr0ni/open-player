@@ -1,28 +1,37 @@
-const json = require('json-file');
-
 let database = __dirname + "/../../modules/database/playlist.config.json";
 
 class Player {
 
     /**
-     * element[0] = table rows
-     * element[1] = current track
-     * element[2] = play button
+     * elements[0] = table rows
+     * elements[1] = current track
+     * elements[2] = play button
+     * elements[3] = progress_bar
      */
     constructor(elements) {
         this.index = 0;
-        this.file = json.read(database);
         this.list = [];
 
-        if (this.file.get('musics') != undefined) {
-            this.file.get('musics').forEach((entry) => {
+        fs.readFile(database, 'utf-8', (err, data) => {
+            if (err) throw err;
+            let musics = JSON.parse(data).musics;
+            if (musics == undefined) return;
+            musics.forEach((entry) => {
+                let m = new Music(entry.titulo, entry.autor, entry.path);
+                m.audio.onloadedmetadata = () => {
+                    this.list.push(m);
+                    elements[0].innerHTML = elements[0].innerHTML + "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td></tr>";
+                }
+            });
+        });
+
+        /*this.file.get('musics').forEach((entry) => {
                 let m = new Music(entry.titulo, entry.autor, entry.path);
                 setTimeout(() => {
                     this.list.push(m);
                     elements[0].innerHTML = elements[0].innerHTML + "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td></tr>";
                 }, 200);
-            });
-        }
+        });*/
 
         this.elements = elements;
     }
@@ -55,8 +64,7 @@ class Player {
      */
     addMusic(music) {
         this.list.push(music);
-        this.file.set('musics', this.list);
-        this.file.write(() => {
+        fs.writeFile(database, JSON.stringify({musics: this.list}), (err) => {
             console.log("[INFO] Playlist saved.");
         });
         return this;
@@ -169,10 +177,10 @@ class Player {
         this.elements[1].textContent = "Nenhuma música tocando...";
         this.elements[2].innerHTML = "<i class=\"fa fa-play\"></i>";
         this.list = [];
-        this.file.set('musics', undefined);
-        this.file.write(() => {
-            console.log("[INFO] Playlist cleared");
+        fs.writeFile(database, JSON.stringify({}), (err) => {
             this.elements[0].innerHTML = "";
+            bar.style.width = "0%";
+            console.log("[INFO] Playlist cleared.");
         });
     }
 }
