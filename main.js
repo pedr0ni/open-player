@@ -28,6 +28,10 @@ app.on('ready', () => {
 
 });
 
+app.on('window-all-closed', () => {
+    app.quit();
+});
+
 ipcMain.on('dialog', (event,type,msg) => {
     if (type == "error") {
         dialog.showErrorBox($TITLE, msg);
