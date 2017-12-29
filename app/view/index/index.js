@@ -8,7 +8,7 @@ let bar = document.querySelector("#bar");
 
 class Music {
 
-    constructor(titulo,autor,duration,path) {
+    constructor(titulo,autor,duration,formatted,path) {
         this.titulo = titulo;
         this.autor = autor;
         this.rawduration = duration;
@@ -16,6 +16,7 @@ class Music {
         this.path = path;
         this.audio = new Audio(path);
         this.current = 0;
+        this.formatted = formatted;
     }
 
     play() {
@@ -200,7 +201,7 @@ add_btn.addEventListener('click', (event) => {
             if (err) throw err;
             var duration = moment().startOf('day').seconds(metadata.duration).format('mm:ss').toString();
             user_musics.innerHTML = user_musics.innerHTML + "<tr><td>"+metadata.title+"</td><td>"+metadata.artist[0]+"</td><td>"+duration+"</td></tr>";
-            control.addMusic(new Music(metadata.title, metadata.artist[0], metadata.duration, dir));
+            control.addMusic(new Music(metadata.title, metadata.artist[0], metadata.duration, duration, dir));
         });
     }
 });
@@ -245,4 +246,19 @@ let prev_btn = document.querySelector("#btn-prev");
 prev_btn.addEventListener('click', (event) => {
     event.preventDefault();
     control.prev();
+});
+
+let query = document.querySelector("#query");
+query.addEventListener('input', (event) => {
+    let busca = document.querySelector("#query").value.toString().toLowerCase();
+    var results = [];
+    control.getList().forEach((entry) => {
+        if (entry.titulo.toLowerCase().indexOf(busca) != -1 || entry.autor.toLowerCase().indexOf(busca) != -1)
+            results.push(entry);
+    });
+    var rows = "";
+    results.forEach((entry) => {
+        rows += "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+entry.formatted+"</td></tr>";
+    })
+    user_musics.innerHTML = rows;
 });
