@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog, ipcMain } = require('electron');
+const { app, BrowserWindow, Menu, Tray, dialog, ipcMain } = require('electron');
 const data = require('./app/modules/data');
 
 let $TITLE = "open-player";
@@ -17,14 +17,19 @@ app.on('ready', () => {
         frame: false,
         icon: __dirname + "/app/assets/images/music_default.png"
     });
+    let tray = new Tray(__dirname + "/app/assets/images/music_default.png");
+    const contextMenu = Menu.buildFromTemplate([
+        {label: 'Item1', type: 'radio'},
+        {label: 'Item2', type: 'radio'}
+    ]);
+    tray.setContextMenu(contextMenu);
+
     if (data.hasUser()) {
         console.log("[INFO] Loaded user " + data.getUser().name);
         mainWindow.loadURL(`${__dirname}/app/view/index/index.html`);
-
     } else {
         console.log("[INFO] Guest user detected! Showing welcome window.");
         mainWindow.loadURL(`${__dirname}/app/view/welcome/welcome.html`);
-
     }
 
 });
