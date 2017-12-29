@@ -32,7 +32,7 @@ npm start
 ## Deployment
 
 ```
-electron-packager open-player
+electron-packager open-player --platform=win32 --arch=x64
 ```
 
 ## Built With
