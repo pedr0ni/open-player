@@ -17,6 +17,7 @@ class Player {
             let musics = JSON.parse(data).musics;
             if (musics == undefined) return;
             musics.forEach((entry) => {
+                if (this.exists(entry.titulo)) return;
                 let m = new Music(entry.titulo, entry.autor, entry.path);
                 m.audio.onloadedmetadata = () => {
                     this.list.push(m);
@@ -24,14 +25,6 @@ class Player {
                 }
             });
         });
-
-        /*this.file.get('musics').forEach((entry) => {
-                let m = new Music(entry.titulo, entry.autor, entry.path);
-                setTimeout(() => {
-                    this.list.push(m);
-                    elements[0].innerHTML = elements[0].innerHTML + "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td></tr>";
-                }, 200);
-        });*/
 
         this.elements = elements;
     }
@@ -183,4 +176,17 @@ class Player {
             console.log("[INFO] Playlist cleared.");
         });
     }
-}
+
+    /**
+     * 
+     * @param string
+     * @return boolean
+     */
+    exists(titulo) {
+        var ret = false;
+        this.list.forEach((entry) => {
+            ret = entry.titulo == titulo;
+        });
+        return ret;
+    }
+} 

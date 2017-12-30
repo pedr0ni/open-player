@@ -22,17 +22,26 @@ add_btn.addEventListener('click', (event) => {
     if (path == undefined) {
         return;
     }
+    var add = 0;
     for (var i = 0; i < path.length; i++) {
         let dir = path[i];
         let parser = mm(fs.createReadStream(dir), function (err, metadata) {
             if (err) throw err;
             let m = new Music(metadata.title, metadata.artist[0], dir);
+            if (player.exists(metadata.title)) {
+                return;
+            }
             m.audio.onloadedmetadata = () => {
                 player.addMusic(m);
                 user_musics.innerHTML = user_musics.innerHTML + "<tr><td>"+metadata.title+"</td><td>"+metadata.artist[0]+"</td><td>"+m.format()+"</td></tr>";
+                add = add + 1;
+                ipcRenderer.send('notify', 'success', 'Adicionado ' + metadata.title + ' na playlist.');
             };
+            
+
         });
     }
+    
 });
 
 let play_btn = document.querySelector("#play-btn");
@@ -59,8 +68,6 @@ play_btn.addEventListener('click', (event) => {
         player.playFirst();
         play_btn.innerHTML = "<i class=\"fa fa-pause\"></i>";
     }
-
-
 });
 
 
