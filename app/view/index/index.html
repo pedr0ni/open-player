@@ -5,6 +5,7 @@
         <title>Escute suas músicas em qualquer plataforma</title>
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="../../assets/css/fontawesome-all.min.css"/>
+        <link rel="stylesheet" href="../../assets/css/semantic.css">
     </head>
 
     <body>
@@ -39,9 +40,12 @@
                         </div>
                     </a>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input id="query" class="form-control mr-sm-2" type="search" placeholder="Música, Autor, Playlist..." aria-label="Procurar">
-                </form>
+                <div class="ui action input">
+                    <input type="text" placeholder="Search...">
+                    <button class="ui icon button">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
             </div>
         </nav>
 
@@ -62,9 +66,12 @@
 
     </body>
 
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="../../assets/js/jquery.min.js"></script>
     <script src="../../modules/Music.js"></script>
     <script src="../../modules/Player.js"></script>
     <script src="index.js"></script>
-    <script src="../../assets/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/semantic.js"></script>
+    <script>if (window.module) module = window.module;</script>
 
 </html>

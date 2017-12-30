@@ -29,11 +29,6 @@ class Player {
                         icon = "<i class=\"far fa-heart\"></i>";
                     }
                     elements[0].innerHTML = elements[0].innerHTML + "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td><td><a id=\"fav-btn-"+this.list.length+"\" fav-id=\""+this.list.length+"\">"+icon+"</a></td></tr>";
-                    let btn = document.querySelector('#fav-btn-'+this.list.length);
-                    btn.onclick = (event) => {
-                        console.log("Fired at " +btn.getAttribute('fav-id'));
-                    };
-                    console.log("registered event listener for " + this.list.length);
                 }
             });
         });
