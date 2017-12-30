@@ -40,11 +40,9 @@ ipcMain.on('dialog', (event,type,msg) => {
 });
 
 ipcMain.on('notify', (event,type,msg) => {
-    if (type == "success") {
-        eNotify.notify({
-            title: $TITLE,
-            text: msg,
-            image: __dirname + "/app/assets/images/success.png"
-        });
-    }
+    eNotify.notify({
+        title: $TITLE,
+        text: msg,
+        image: __dirname + "/app/assets/images/"+type.toLowerCase()+".png"
+    });
 });

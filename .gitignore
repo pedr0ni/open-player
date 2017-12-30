@@ -1,1 +1,4 @@
 node_modules/
+.vscode
+app/modules/database/user.config.json
+app/modules/database/playlist.config.json
