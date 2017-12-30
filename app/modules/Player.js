@@ -19,9 +19,21 @@ class Player {
             musics.forEach((entry) => {
                 if (this.exists(entry.titulo)) return;
                 let m = new Music(entry.titulo, entry.autor, entry.path);
+                m.fav = entry.fav;
                 m.audio.onloadedmetadata = () => {
                     this.list.push(m);
-                    elements[0].innerHTML = elements[0].innerHTML + "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td></tr>";
+                    let icon = null;
+                    if (m.fav) {
+                        icon = "<i class=\"fa fa-heart\"></i>";
+                    } else {
+                        icon = "<i class=\"far fa-heart\"></i>";
+                    }
+                    elements[0].innerHTML = elements[0].innerHTML + "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td><td><a id=\"fav-btn-"+this.list.length+"\" fav-id=\""+this.list.length+"\">"+icon+"</a></td></tr>";
+                    let btn = document.querySelector('#fav-btn-'+this.list.length);
+                    btn.onclick = (event) => {
+                        console.log("Fired at " +btn.getAttribute('fav-id'));
+                    };
+                    console.log("registered event listener for " + this.list.length);
                 }
             });
         });

@@ -7,6 +7,7 @@ class Music {
         this.autor = autor;
         this.path = path;
         this.audio = new Audio(path);
+        this.fav = false;
     }
 
     play() {

@@ -33,8 +33,13 @@ add_btn.addEventListener('click', (event) => {
             }
             m.audio.onloadedmetadata = () => {
                 player.addMusic(m);
-                user_musics.innerHTML = user_musics.innerHTML + "<tr><td>"+metadata.title+"</td><td>"+metadata.artist[0]+"</td><td>"+m.format()+"</td></tr>";
+                user_musics.innerHTML = user_musics.innerHTML + "<tr><td>"+metadata.title+"</td><td>"+metadata.artist[0]+"</td><td>"+m.format()+"</td><td><a id=\"fav-btn-"+player.getList().length+"\" fav-id=\""+player.getList().length+"\"><i class=\"far fa-heart\"></i></a></td></tr>";
                 ipcRenderer.send('notify', 'success', 'Adicionado ' + metadata.title + ' na playlist.');
+                let btn = document.querySelector('#fav-btn-'+player.getList().length);
+                btn.onclick = (event) => {
+                    console.log("Fired at " +btn.getAttribute('fav-id'));
+                };
+                console.log("registered event listener for " + player.getList().length);
             };
         });
     }
@@ -101,11 +106,4 @@ clear_btn.addEventListener('click', (event) => {
     event.preventDefault();
 
     player.clear();
-});
-
-let conteudo = document.querySelector("#conteudo");
-let yt_btn = document.querySelector("#yt-btn");
-yt_btn.addEventListener('click', (event) => {
-    event.preventDefault();
-    
 });
