@@ -21,10 +21,13 @@ class Music {
     stop() {
         this.audio.pause();
         this.audio = new Audio(this.path);
-        this.current = 0;
     }
 
     format() {
         return moment().startOf('day').seconds(this.audio.duration).format('mm:ss').toString();
+    }
+
+    getIcon() {
+        return this.fav ? "<i class\"fa fa-heart\"></i>" : "<i class\"far fa-heart\"></i>";
     }
 }

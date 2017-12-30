@@ -96,7 +96,13 @@ query.addEventListener('input', (event) => {
     });
     var rows = "";
     results.forEach((entry) => {
-        rows += "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+entry.format()+"</td></tr>";
+        let icon;
+        if (entry.fav) {
+            icon = "<i class=\"fa fa-heart\"></i>";
+        } else {
+            icon = "<i class=\"far fa-heart\"></i>";
+        }
+        rows += "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+entry.format()+"</td><td><a>"+icon+"</a></td></tr>";
     })
     user_musics.innerHTML = rows;
 });
@@ -104,6 +110,6 @@ query.addEventListener('input', (event) => {
 let clear_btn = document.querySelector("#clear-btn");
 clear_btn.addEventListener('click', (event) => {
     event.preventDefault();
-
     player.clear();
 });
+

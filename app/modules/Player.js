@@ -28,7 +28,10 @@ class Player {
                     } else {
                         icon = "<i class=\"far fa-heart\"></i>";
                     }
-                    elements[0].innerHTML = elements[0].innerHTML + "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td><td><a id=\"fav-btn-"+this.list.length+"\" fav-id=\""+this.list.length+"\">"+icon+"</a></td></tr>";
+                    $('#user-musics').html($('#user-musics').html() + "<tr id=\"scope-"+this.list.length+"\"><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td><td><a>"+icon+"</a></td></tr>");
+                    $('#scope-'+this.list.length).hide();
+                    $('#scope-'+this.list.length).transition('fade right');
+                    console.log("loaded");
                 }
             });
         });
