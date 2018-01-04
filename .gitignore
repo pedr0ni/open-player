@@ -2,3 +2,4 @@ node_modules/
 .vscode
 app/database/user.config.json
 app/database/playlist.config.json
+app/database/key.txt

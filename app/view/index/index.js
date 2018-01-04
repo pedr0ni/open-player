@@ -4,6 +4,7 @@ const mm = require('musicmetadata');
 const { ipcRenderer } = require('electron');
 
 let bar = document.querySelector("#bar");
+let yt = new Youtube();
 
 let user_musics = document.querySelector("#user-musics");
 let player = new Player([user_musics, document.querySelector("#current-track"), document.querySelector("#play-btn"), bar], false);
@@ -82,7 +83,7 @@ prev_btn.addEventListener('click', (event) => {
 });
 
 let query = document.querySelector("#query");
-query.addEventListener('input', (event) => {
+/*query.addEventListener('input', (event) => {
     let busca = document.querySelector("#query").value.toString().toLowerCase();
     var results = [];
     player.getList().forEach((entry) => {
@@ -94,6 +95,28 @@ query.addEventListener('input', (event) => {
         rows += "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+entry.format()+"</td><td><a>"+entry.getIcon()+"</a></td></tr>";
     })
     user_musics.innerHTML = rows;
+});*/
+query.addEventListener('keydown', (event) => {
+    if (event.key == "Enter") {
+        $("#loader").addClass("active");
+        $(user_musics).html("");
+        let req = yt.search(query.value.toString(), (res) => {
+            console.log(res);
+            let lista = res.items;
+            
+            lista.forEach(entry => {
+                let snippet = entry.snippet;
+                $(user_musics).append("<tr><td>" + snippet.title + "</td><td>" + snippet.channelTitle + "</td><td>00:00</td><td><i class=\"fa fa-download\"></i></td></tr>");
+            });
+            
+            $("#loader").removeClass("active");
+        });
+    }
+});
+query.addEventListener('input', (event) => {
+    if (query.value.length == 0) {
+        player.renderList();
+    }
 });
 
 let clear_btn = document.querySelector("#clear-btn");
@@ -115,4 +138,3 @@ list_fav_btn.addEventListener('click', (event) => {
         player.renderList();
     }
 });
-

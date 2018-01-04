@@ -19,7 +19,7 @@
                         <a class="nav-link" id="clear-btn"><i class="fa fa-trash" style="font-size: 15px !important; margin-top: 50%;"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="list-fav-btn"><i class="far fa-heart" style="font-size: 15px !important; margin-top: 50%;"></i></a>
+                        <a class="nav-link" id="list-fav-btn"><i class="fa fa-heart" style="font-size: 15px !important; margin-top: 50%;"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="btn-prev"><i class="fa fa-angle-double-left"></i></a>
@@ -41,7 +41,7 @@
                     </a>
                 </ul>
                 <div class="ui action input">
-                    <input id="query" type="text" placeholder="Procurar...">
+                    <input id="query" type="text" placeholder="Procurar no Youtube...">
                     <button class="ui icon button">
                       <i class="fa fa-search"></i>
                     </button>
@@ -49,6 +49,9 @@
             </div>
         </nav>
 
+        <div id="loader" class="ui dimmer">
+            <div class="ui loader"></div>
+        </div>
         <div id="conteudo">
             <table class="table table-striped">
                 <thead>
@@ -70,6 +73,7 @@
     <script src="../../assets/js/jquery.min.js"></script>
     <script src="../../modules/Music.js"></script>
     <script src="../../modules/Player.js"></script>
+    <script src="../../modules/Youtube.js"></script>
     <script src="index.js"></script>
     <script src="../../assets/js/semantic.js"></script>
     <script>if (window.module) module = window.module;</script>
