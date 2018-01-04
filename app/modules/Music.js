@@ -10,6 +10,10 @@ class Music {
         this.fav = false;
     }
 
+    setId(id) {
+        this.id = id;
+    }
+
     play() {
         this.audio.play();
     }
@@ -28,6 +32,14 @@ class Music {
     }
 
     getIcon() {
-        return this.fav ? "<i class\"fa fa-heart\"></i>" : "<i class\"far fa-heart\"></i>";
+        return this.fav ? "<i class=\"fa fa-heart\"></i>" : "<i class=\"far fa-heart\"></i>";
+    }
+
+    setFavorite(b) {
+        this.fav = b;
+    }
+
+    isFavorite() {
+        return this.fav;
     }
 }

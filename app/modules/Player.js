@@ -22,21 +22,48 @@ class Player {
                 m.fav = entry.fav;
                 m.audio.onloadedmetadata = () => {
                     this.list.push(m);
-                    let icon = null;
-                    if (m.fav) {
-                        icon = "<i class=\"fa fa-heart\"></i>";
-                    } else {
-                        icon = "<i class=\"far fa-heart\"></i>";
-                    }
-                    $('#user-musics').html($('#user-musics').html() + "<tr id=\"scope-"+this.list.length+"\"><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td><td><a>"+icon+"</a></td></tr>");
-                    $('#scope-'+this.list.length).hide();
-                    $('#scope-'+this.list.length).transition('fade right');
-                    console.log("loaded");
+                    m.setId(this.list.length);
+                    $('#user-musics').html($('#user-musics').html() + "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+m.format()+"</td><td><a style=\"cursor: pointer;\" class=\"fav-btn\" fav-id=\""+this.list.length+"\">"+m.getIcon()+"</a></td></tr>");
+                    $('.fav-btn').on('click', (event) => {
+                        let favid = $(event.target.parentElement).attr('fav-id');
+                        let musicChange = this.getMusicById(favid);
+                        if (musicChange.isFavorite()) {
+                            musicChange.setFavorite(false);
+                            $(event.target).removeClass('fa').addClass('far');
+                        } else {
+                            $(event.target).removeClass('far').addClass('fa');
+                            musicChange.setFavorite(true);
+                        }
+
+                        this.saveList();
+
+                    });
                 }
             });
         });
 
         this.elements = elements;
+    }
+
+    saveList() {
+        fs.writeFile(database, JSON.stringify({musics: this.list}), (err) => {
+            console.log("[INFO] Playlist saved.");
+        });
+    }
+
+    /**
+     * 
+     * @param {int} id 
+     * @returns {Music}
+     */
+    getMusicById(id) {
+        let result;
+        this.list.forEach(entry => {
+            if (entry.id == id) {
+                result = entry;
+            }
+        });
+        return result;
     }
 
     /**
@@ -67,9 +94,7 @@ class Player {
      */
     addMusic(music) {
         this.list.push(music);
-        fs.writeFile(database, JSON.stringify({musics: this.list}), (err) => {
-            console.log("[INFO] Playlist saved.");
-        });
+        this.saveList();
         return this;
     }
 

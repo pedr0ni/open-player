@@ -33,13 +33,8 @@ add_btn.addEventListener('click', (event) => {
             }
             m.audio.onloadedmetadata = () => {
                 player.addMusic(m);
-                user_musics.innerHTML = user_musics.innerHTML + "<tr><td>"+metadata.title+"</td><td>"+metadata.artist[0]+"</td><td>"+m.format()+"</td><td><a id=\"fav-btn-"+player.getList().length+"\" fav-id=\""+player.getList().length+"\"><i class=\"far fa-heart\"></i></a></td></tr>";
+                user_musics.innerHTML = user_musics.innerHTML + "<tr><td>"+metadata.title+"</td><td>"+metadata.artist[0]+"</td><td>"+m.format()+"</td><td><a>"+m.getIcon()+"</a></td></tr>";
                 ipcRenderer.send('notify', 'success', 'Adicionado ' + metadata.title + ' na playlist.');
-                let btn = document.querySelector('#fav-btn-'+player.getList().length);
-                btn.onclick = (event) => {
-                    console.log("Fired at " +btn.getAttribute('fav-id'));
-                };
-                console.log("registered event listener for " + player.getList().length);
             };
         });
     }
@@ -96,13 +91,7 @@ query.addEventListener('input', (event) => {
     });
     var rows = "";
     results.forEach((entry) => {
-        let icon;
-        if (entry.fav) {
-            icon = "<i class=\"fa fa-heart\"></i>";
-        } else {
-            icon = "<i class=\"far fa-heart\"></i>";
-        }
-        rows += "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+entry.format()+"</td><td><a>"+icon+"</a></td></tr>";
+        rows += "<tr><td>"+entry.titulo+"</td><td>"+entry.autor+"</td><td>"+entry.format()+"</td><td><a>"+entry.getIcon()+"</a></td></tr>";
     })
     user_musics.innerHTML = rows;
 });
