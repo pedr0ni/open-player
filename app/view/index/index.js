@@ -6,7 +6,7 @@ const { ipcRenderer } = require('electron');
 let bar = document.querySelector("#bar");
 
 let user_musics = document.querySelector("#user-musics");
-let player = new Player([user_musics, document.querySelector("#current-track"), document.querySelector("#play-btn"), bar]);
+let player = new Player([user_musics, document.querySelector("#current-track"), document.querySelector("#play-btn"), bar], false);
 
 let add_btn = document.querySelector("#add-music");
 add_btn.addEventListener('click', (event) => {
@@ -100,5 +100,19 @@ let clear_btn = document.querySelector("#clear-btn");
 clear_btn.addEventListener('click', (event) => {
     event.preventDefault();
     player.clear();
+});
+
+let list_fav_btn = document.querySelector("#list-fav-btn");
+list_fav_btn.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (player.fav_list) {
+        player.fav_list = false;
+        $(list_fav_btn.children).removeClass('fa').addClass('far');
+        player.renderList();
+    } else {
+        player.fav_list = true;
+        $(list_fav_btn.children).removeClass('far').addClass('fa');
+        player.renderList();
+    }
 });
 

@@ -10,16 +10,24 @@ class Player {
      * elements[2] = play button
      * elements[3] = progress_bar
      */
-    constructor(elements) {
+    constructor(elements, onlyfav) {
         this.index = 0;
         this.list = [];
+        this.fav_list = false;
+        this.renderList();
+        this.elements = elements;
+    }
 
+    renderList() {
+        this.list = [];
+        $('#user-musics').html("");
         fs.readFile(database, 'utf-8', (err, data) => {
             if (err) throw err;
             let musics = JSON.parse(data).musics;
             if (musics == undefined) return;
             musics.forEach((entry) => {
                 if (this.exists(entry.titulo)) return;
+                if (this.fav_list && !entry.fav) return;
                 let m = new Music(entry.titulo, entry.autor, entry.path);
                 m.fav = entry.fav;
                 m.audio.onloadedmetadata = () => {
@@ -36,15 +44,11 @@ class Player {
                             $(event.target).removeClass('far').addClass('fa');
                             musicChange.setFavorite(true);
                         }
-
                         this.saveList();
-
                     });
                 }
             });
         });
-
-        this.elements = elements;
     }
 
     saveList() {
