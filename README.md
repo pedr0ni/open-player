@@ -1,6 +1,5 @@
 # open-player
 
-![build](https://img.shields.io/travis/rust-lang/rust.svg)
 ![license](https://img.shields.io/aur/license/yaourt.svg)
 [![download](https://img.shields.io/badge/Download-1.0.1-blue.svg)](https://github.com/pedr0ni/open-player/releases)
 
