@@ -1,4 +1,6 @@
-let database = __dirname + "/../../modules/database/playlist.config.json";
+const path = require('path');
+
+let database = path.join(__dirname, '../..', '/database/playlist.config.json');
 
 class Player {
 
