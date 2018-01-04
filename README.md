@@ -15,12 +15,7 @@ A open-source music player with Electron
 ```
 git clone https://github.com/pedr0ni/open-player.git
 cd open-player
-npm init
-npm install electron --save
-npm install json-file --save
-npm install moment --save
-npm install musicmetadata --save
-npm install electron-packager -g
+npm install
 ```
 
 ## Running the tests
